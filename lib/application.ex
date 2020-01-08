@@ -10,15 +10,28 @@ defmodule Sample.Application do
     end
   end
 
-  def start(_, _) do
-    initialize()
-    Supervisor.start_link([], strategy: :one_for_one, name: Sample.Supervisor)
+  def env(_app) do
+    [
+      {:port, :application.get_env(:n2o, :port, 8002)}
+    ]
   end
 
-  def initialize() do
-    :cowboy.start_tls(:http, :n2o_cowboy.env(:sample), %{env: %{dispatch: :n2o_cowboy2.points()}})
+  def points() do
+    :cowboy_router.compile([
+      {:_,
+       [
+         {'/ws/[...]', :n2o_cowboy2, []},
+         {'/bin/[...]', :cowboy_static, {:dir, "priv/storage", []}},
+         {'/app/[...]', :cowboy_static, {:dir, "priv/static", []}}
+       ]}
+    ])
+  end
+
+  def start(_, _) do
+    :cowboy.start_clear(:http, env(:sample), %{env: %{dispatch: points()}})
     :kvs.join()
     :syn.init()
+    Supervisor.start_link([], strategy: :one_for_one, name: Sample.Supervisor)
   end
 
 end

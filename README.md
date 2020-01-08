@@ -1,5 +1,5 @@
-SAMPLE: Elixir N2O App
-======================
+SAMPLE: Move from Elixir to N2O
+===============================
 
 TL;DR Simple sample how to use N2O from Elixir.
 

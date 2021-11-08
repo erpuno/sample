@@ -1,5 +1,5 @@
-SAMPLE: Move from Elixir to N2O
-===============================
+SAMPLE: Move from Phoenix to N2O
+================================
 
 TL;DR Simple sample how to use N2O from Elixir.
 

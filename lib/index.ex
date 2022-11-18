@@ -1,44 +1,44 @@
 defmodule Sample.Index do
-  use N2O, with: [:kvs, :n2o, :nitro]
-
+  require NITRO
+  require KVS
+  require N2O
   require Logger
 
   def event(:init) do
     room = Sample.Application.room
-    KVS.ensure(writer(id: room))
-    N2O.reg({:topic, room})
-    N2O.reg(N2O.sid())
-#    NITRO.clear(:history)
-    NITRO.update(:upload, upload())
-    NITRO.update(:heading, h2(id: :heading, body: room))
-    NITRO.update(:logout, button(id: :logout, postback: :logout, body: "Logout"))
-    NITRO.update(:send, button(id: :send, body: "Chat", postback: :chat, source: [:message]))
+    :kvs.ensure(KVS.writer(id: room))
+    :n2o.reg({:topic, room})
+    :n2o.reg(:n2o.sid())
+    :nitro.update(:upload, NITRO.upload())
+    :nitro.update(:heading, NITRO.h2(id: :heading, body: room))
+    :nitro.update(:logout, NITRO.button(id: :logout, postback: :logout, body: "Logout"))
+    :nitro.update(:send, NITRO.button(id: :send, body: "Chat", postback: :chat, source: [:message]))
 
     room
-    |> KVS.all()
+    |> :kvs.all()
     |> Enum.each(fn {:msg, _, user, message} ->
       event({:client, {user, message}})
     end)
   end
 
   def event(:logout) do
-    N2O.user([])
-    NITRO.redirect("/app/login.htm")
+      :n2o.user([])
+      :nitro.redirect("/app/login.htm")
   end
 
   def event(:chat) do
-    chat(NITRO.q(:message))
+      chat(:nitro.q(:message))
   end
 
-  def event(ftp(sid: s, filename: f, status: {:event, :stop})) do
-    name = hd(:lists.reverse(:string.tokens(NITRO.to_list(f), '/')))
-    link = link(href: :erlang.iolist_to_binary(["/app/", s, "/", name]), body: name)
-    chat(NITRO.render(link))
+  def event(N2O.ftp(sid: s, filename: f, status: {:event, :stop})) do
+    name = hd(:lists.reverse(:string.tokens(:nitro.to_list(f), '/')))
+    link = NITRO.link(href: :erlang.iolist_to_binary(["/app/", s, "/", name]), body: name)
+    chat(:nitro.render(link))
   end
 
   def event({:client, {user, message}}) do
-    NITRO.wire(jq(target: :message, method: [:focus, :select]))
-    NITRO.insert_top(:history, message(body: [author(body: user), NITRO.jse(message)]))
+    :nitro.wire(NITRO.jq(target: :message, method: [:focus, :select]))
+    :nitro.insert_top(:history, NITRO.message(body: [NITRO.author(body: user), :nitro.jse(message)]))
   end
 
   def event(unexpected) do
@@ -49,14 +49,14 @@ defmodule Sample.Index do
 
   def chat(message) do
     room = Sample.Application.room
-    user = N2O.user()
+    user = :n2o.user()
 
     room
-    |> KVS.writer()
-    |> writer(args: {:msg, KVS.seq([], []), user, message})
-    |> KVS.add()
-    |> KVS.save()
+    |> :kvs.writer()
+    |> KVS.writer(args: {:msg, :kvs.seq([], []), user, message})
+    |> :kvs.add()
+    |> :kvs.save()
 
-    N2O.send({:topic, room}, client(data: {user, message}))
+    :n2o.send({:topic, room}, N2O.client(data: {user, message}))
   end
 end

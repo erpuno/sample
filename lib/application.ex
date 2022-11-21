@@ -16,19 +16,8 @@ defmodule Sample.Application do
     ]
   end
 
-  def points() do
-    :cowboy_router.compile([
-      {:_,
-       [
-         {'/ws/[...]', :n2o_cowboy, []},
-         {'/bin/[...]', :cowboy_static, {:dir, "priv/storage", []}},
-         {'/app/[...]', :cowboy_static, {:dir, "priv/static", []}}
-       ]}
-    ])
-  end
-
   def start(_, _) do
-    :cowboy.start_clear(:http, env(:sample), %{env: %{dispatch: points()}})
+    :cowboy.start_clear(:http, env(:sample), %{env: %{dispatch: :n2o_cowboy.points()}})
     :kvs.join()
     Supervisor.start_link([], strategy: :one_for_one, name: Sample.Supervisor)
   end

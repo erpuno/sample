@@ -2,6 +2,7 @@ use Mix.Config
 
 config :n2o,
   port: 8002,
+  app: :sample,
   pickler: :n2o_secret,
   mq: :n2o_syn,
   upload: "./priv/static",

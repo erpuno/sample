@@ -32,7 +32,7 @@ defmodule Sample.Mixfile do
 
   def deps() do
     [
-      {:ex_doc, "~> 0.20.2", only: :dev},
+      {:ex_doc, "~> 0.29.0", only: :dev},
       {:cowboy, "~> 2.8.0"},
       {:rocksdb, "~> 1.6.0"},
       {:nitro, "~> 8.2.4"},

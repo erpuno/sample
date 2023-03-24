@@ -35,9 +35,9 @@ defmodule Sample.Mixfile do
       {:ex_doc, "~> 0.20.2", only: :dev},
       {:cowboy, "~> 2.8.0"},
       {:rocksdb, "~> 1.6.0"},
-      {:nitro, "~> 7.10.0"},
-      {:kvs, "~> 9.4.8"},
-      {:n2o, "~> 9.11.0"},
+      {:nitro, "~> 8.2.4"},
+      {:kvs, "~> 10.3.0"},
+      {:n2o, "~> 10.3.2"},
       {:syn, "~> 2.1.1"}
     ]
   end

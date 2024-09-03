@@ -4,7 +4,7 @@ defmodule Sample.Mixfile do
   def project() do
     [
       app: :sample,
-      version: "6.6.7",
+      version: "6.9.1",
       description: "SAMPLE Elixir Application",
       package: package(),
       deps: deps()
@@ -25,7 +25,7 @@ defmodule Sample.Mixfile do
   def application() do
     [
       mod: {Sample.Application, []},
-      extra_applications: [:ranch, :mnesia, :xmerl, :cowboy, :rocksdb, :logger, :n2o, :kvs, :syn, :nitro]
+      extra_applications: [:ranch, :rocksdb, :mnesia, :xmerl, :cowboy, :logger, :n2o, :kvs, :syn, :nitro]
     ]
   end
 

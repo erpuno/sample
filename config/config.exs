@@ -13,5 +13,6 @@ config :n2o,
 
 config :kvs,
   dba: :kvs_rocks,
+  mnesia_context: :sync_transaction,
   dba_st: :kvs_st,
   schema: [:kvs, :kvs_stream]

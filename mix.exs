@@ -7,7 +7,6 @@ defmodule Sample.Mixfile do
       version: "6.6.7",
       description: "SAMPLE Elixir Application",
       package: package(),
-      elixir: "~> 1.7",
       deps: deps()
     ]
   end
@@ -26,7 +25,7 @@ defmodule Sample.Mixfile do
   def application() do
     [
       mod: {Sample.Application, []},
-      applications: [:ranch, :cowboy, :rocksdb, :logger, :n2o, :kvs, :syn, :nitro]
+      extra_applications: [:ranch, :mnesia, :xmerl, :cowboy, :rocksdb, :logger, :n2o, :kvs, :syn, :nitro]
     ]
   end
 
@@ -34,10 +33,10 @@ defmodule Sample.Mixfile do
     [
       {:ex_doc, "~> 0.29.0", only: :dev},
       {:cowboy, "~> 2.8.0"},
-      {:rocksdb, "~> 1.6.0"},
+      {:rocksdb, git: "https://github.com/emqx/erlang-rocksdb", branch: "master"},
       {:nitro, "~> 8.2.4"},
-      {:kvs, "~> 10.3.0"},
-      {:n2o, "~> 10.3.2"},
+      {:kvs, "~> 10.8.3"},
+      {:n2o, "~> 10.12.4"},
       {:syn, "~> 2.1.1"}
     ]
   end

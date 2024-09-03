@@ -19,6 +19,6 @@ defmodule Sample.Login do
   def event(unexpected) do
     unexpected
     |> inspect()
-    |> Logger.warn()
+    |> Logger.warning()
   end
 end

@@ -23,7 +23,7 @@ defmodule Sample.Index do
     :nitro.wire(NITRO.jq(target: :message, method: [:focus, :select]))
     :nitro.insert_top(:history, NITRO.message(body: [NITRO.author(body: user), :nitro.jse(message)]))
   end
-  def event(unexpected), do: unexpected |> inspect() |> Logger.warn()
+  def event(unexpected), do: unexpected |> inspect() |> Logger.warning()
 
   def chat(message) do
     room = Sample.Application.room ; user = :n2o.user()

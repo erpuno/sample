@@ -4,11 +4,13 @@ defmodule Sample.Login do
   require Logger
 
   def event(:init) do
-    login_button = NITRO.button(id: :loginButton, body: "HELO", postback: :login2, source: [:user, :room])
+     :io.format 'LOGIN INIT'
+    login_button = NITRO.button(id: :loginButton, body: "HELO", postback: :login, source: [:user, :room])
     :nitro.update(:loginButton, login_button)
   end
 
-  def event(:login2) do
+  def event(:login) do
+     :io.format 'LOGIN PRESSED'
     user = :nitro.to_list(:nitro.q(:user))
     room = :nitro.to_binary(:nitro.q(:room))
     :n2o.user(user)

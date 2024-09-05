@@ -2,12 +2,13 @@
 Sample.Application.html
 Sample.Index.html
 Sample.Login.html
-Sample.Routes.html
+Sample.Static.html
+Sample.WS.html
 api-reference.html
 dist/handlebars.runtime-NWIB6V2M.js
-dist/handlebars.templates-XRYTXUVD.js
-dist/html-EHGDP2LQ.js
-dist/html-elixir-MB5C7R66.css
+dist/handlebars.templates-XWGFFSCD.js
+dist/html-JDI3AVDD.js
+dist/html-elixir-HHVY3JYD.css
 dist/inconsolata-latin-400-normal-RGKDDNDD.woff2
 dist/inconsolata-latin-700-normal-DTS2D7TO.woff2
 dist/inconsolata-latin-ext-400-normal-K7HVGTP7.woff2
@@ -31,7 +32,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-46A4A1B4.js
-dist/sidebar_items-4E48FC0E.js
+dist/search_items-34017EA2.js
+dist/sidebar_items-632A289A.js
 index.html
 search.html

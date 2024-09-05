@@ -5,15 +5,14 @@ defmodule Sample.WS do
   plug :dispatch
 
   get "/ws/app/:mod", do: conn |> WebSockAdapter.upgrade(Sample.WS, [module: extract(mod)], timeout: 60_000) |> halt()
-
-  def extract("index" <> __), do: Sample.Index
-  def extract("login" <> __), do: Sample.Login
+  def extract(route), do: :application.get_env(:n2o, :router, Sample.Application).route(route)
 
   def init(args), do: {:ok, N2O.cx(module: Keyword.get(args, :module)) }
   def handle_in({"N2O," <> _ = message, _}, state), do: response(:n2o_proto.stream({:text,message},[],state))
   def handle_in({"PING", _}, state), do: {:reply, :ok, {:text, "PONG"}, state}
   def handle_in({message, _}, state) when is_binary(message), do: response(:n2o_proto.stream({:binary,message},[],state))
   def handle_info(message, state), do: response(:n2o_proto.info(message,[],state))
+  def terminate(message, state), do: response(:n2o_proto.info(message,[],state))
 
   def response({:reply,{:binary,rep},_,s}), do: {:reply,:ok,{:binary,rep},s}
   def response({:reply,{:text,rep},_,s}),   do: {:reply,:ok,{:text,rep},s}

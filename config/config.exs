@@ -9,7 +9,7 @@ config :n2o,
   nitro_prolongate: true,
   ttl: 60,
   protocols: [:nitro_n2o, :n2o_ftp],
-  routes: Sample.Routes
+  routes: Sample.Application
 
 config :kvs,
   dba: :kvs_rocks,

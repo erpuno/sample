@@ -1,8 +1,16 @@
 defmodule Sample.Index do
   require NITRO ; require KVS ; require N2O ; require Logger
 
+  def room() do
+    case :n2o.session(:room) do
+         '' -> '/root'
+         "" -> '/root'
+          x -> x
+    end
+  end
+
   def event(:init) do
-    room = Sample.Application.room
+    room = Sample.Index.room
     :kvs.ensure(KVS.writer(id: room)) ; :n2o.reg({:topic, room})
     :nitro.update(:upload, NITRO.upload())
     :nitro.update(:heading, NITRO.h2(id: :heading, body: room))
@@ -26,7 +34,7 @@ defmodule Sample.Index do
   def event(unexpected), do: unexpected |> inspect() |> Logger.warning()
 
   def chat(message) do
-    room = Sample.Application.room ; user = :n2o.user()
+    room = Sample.Index.room ; user = :n2o.user()
     room |> :kvs.writer() |> KVS.writer(args: {:msg, :kvs.seq([], []), user, message})
     |> :kvs.add() |> :kvs.save()
     :n2o.send({:topic, room}, N2O.client(data: {user, message}))

@@ -14,9 +14,10 @@ defmodule Sample.WS do
   def init(args), do: {:ok, N2O.cx(module: Keyword.get(args, :module)) }
   def handle_in({"N2O," <> _ = message, _}, state), do: response(:n2o_proto.stream({:text,message},[],state))
   def handle_in({"PING",  _}, state), do: {:reply, :ok, {:text, "PONG"}, state}
-  def handle_in({message, _}, state) do
-      :io.format 'Message: ~p~n', [:erlang.binary_to_term(message)]
-      x = :n2o_proto.stream(message,[],state)
+  def handle_in({message, _}, state) when is_binary(message) do
+      bin = :erlang.binary_to_term(message)
+      :io.format 'Message: ~p~n', [bin]
+      x = :n2o_proto.stream({:binary,message},[],state)
       :io.format 'X: ~p~n', [x]
       response(x)
   end

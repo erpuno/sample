@@ -20,7 +20,6 @@ defmodule Sample.Index do
     chat(:nitro.render(link))
   end
   def event({:client, {user, message}}) do
-    :io.format 'client'
     :nitro.wire(NITRO.jq(target: :message, method: [:focus, :select]))
     :nitro.insert_top(:history, NITRO.message(body: [NITRO.author(body: user), :nitro.jse(message)]))
   end

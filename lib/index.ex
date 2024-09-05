@@ -2,11 +2,11 @@ defmodule Sample.Index do
   require NITRO ; require KVS ; require N2O ; require Logger
 
   def room() do
-    case :n2o.session(:room) do
-         '' -> '/root'
-         "" -> '/root'
-          x -> x
-    end
+      case :n2o.session(:room) do
+           '' -> "lobby"
+           "" -> "lobby"
+           x -> x
+      end
   end
 
   def event(:init) do
@@ -20,7 +20,7 @@ defmodule Sample.Index do
       event({:client, {user, message}})
     end)
   end
-  def event(:logout) do :n2o.user([]) ; :nitro.redirect("/app/login.htm") end
+  def event(:logout) do :n2o.user([]) ; :nitro.wire("ws.close();") ; :nitro.redirect("/app/login.htm") end
   def event(:chat), do: chat(:nitro.q(:message))
   def event(N2O.ftp(sid: s, filename: f, status: {:event, :stop})) do
     name = hd(:lists.reverse(:string.tokens(:nitro.to_list(f), '/')))

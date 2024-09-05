@@ -1,5 +1,6 @@
 defmodule Sample.Application do
-  use Application ; use N2O
+  require N2O
+  use Application
 
   def route(<<"/ws/app/", p::binary>>),  do: route(p)
   def route(<<"index", _::binary>>), do: Sample.Index

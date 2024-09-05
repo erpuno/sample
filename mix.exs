@@ -25,7 +25,7 @@ defmodule Sample.Mixfile do
   def application() do
     [
       mod: {Sample.Application, []},
-      extra_applications: [:ranch, :rocksdb, :mnesia, :xmerl, :cowboy, :logger, :n2o, :kvs, :syn, :nitro]
+      extra_applications: [:rocksdb, :mnesia, :xmerl, :logger, :n2o, :kvs, :syn, :nitro]
     ]
   end
 
@@ -34,7 +34,7 @@ defmodule Sample.Mixfile do
       {:ex_doc, "~> 0.29.0", only: :dev},
       {:plug, "~> 1.15.3"},
       {:bandit, "~> 1.0"},
-      {:cowboy, "~> 2.8.0"},
+      {:websock_adapter, "~> 0.5"},
       {:rocksdb, git: "https://github.com/emqx/erlang-rocksdb", branch: "master"},
       {:nitro, "~> 8.2.4"},
       {:kvs, "~> 10.8.3"},

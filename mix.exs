@@ -32,6 +32,8 @@ defmodule Sample.Mixfile do
   def deps() do
     [
       {:ex_doc, "~> 0.29.0", only: :dev},
+      {:plug, "~> 1.15.3"},
+      {:bandit, "~> 1.0"},
       {:cowboy, "~> 2.8.0"},
       {:rocksdb, git: "https://github.com/emqx/erlang-rocksdb", branch: "master"},
       {:nitro, "~> 8.2.4"},

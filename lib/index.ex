@@ -12,7 +12,7 @@ defmodule Sample.Index do
       event({:client, {user, message}})
     end)
   end
-  def event(:logout), do: :n2o.user([]) ; :nitro.redirect("/app/login.htm")
+  def event(:logout) do :n2o.user([]) ; :nitro.redirect("/app/login.htm") end
   def event(:chat), do: chat(:nitro.q(:message))
   def event(N2O.ftp(sid: s, filename: f, status: {:event, :stop})) do
     name = hd(:lists.reverse(:string.tokens(:nitro.to_list(f), '/')))

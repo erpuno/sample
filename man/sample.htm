@@ -69,11 +69,11 @@
 
 <h3>COWBOY</h3>
 
-<p>SAMPLE application uses COWBOY as a static HTTP server
+<p>SAMPLE application uses BANDIT as a static HTTP server
    and as a WebSocket server.</p>
 
         <figure>
-            <figcaption>Picture 3. COWBOY setup</figcaption>
+            <figcaption>Picture 3. BANDIT setup</figcaption>
             <code>
  start(_,_) -> cowboy:start_tls(http,n2o_cowboy:env(?MODULE),
                  #{env=>#{dispatch=>n2o_cowboy:points() }}),

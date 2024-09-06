@@ -14,6 +14,7 @@ defmodule Sample.Application do
 
   def start(_, _) do
       :kvs.join()
+      :io.format 'Application URI: http://localhost:8004/app/index.htm'
       children = [ { Bandit, scheme: :http, port: 8002, plug: Sample.WS },
                    { Bandit, scheme: :http, port: 8004, plug: Sample.Static } ]
       Supervisor.start_link(children, strategy: :one_for_one, name: Sample.Supervisor)
